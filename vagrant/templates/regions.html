@@ -1,0 +1,12 @@
+<!--showCategories-->
+<section id="showRegions">
+    <div class="col-md-3">
+        <h6 class="lead">Regions</h6>
+        <div class="list-group">
+            {% for region in regions %}
+            <a href="{{url_for('showRegion', region_name = region.name)}}" class="list-group-city">{{ region.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!--/showCategories-->

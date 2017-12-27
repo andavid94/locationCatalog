@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% include "nav.html" %}
+{% block content %}
+
+<section id="editCity" class="section">
+    <div class="section-content container padding-1-5">
+        <h1>Edit City</h1>
+
+        <form action="{{url_for('editCity', region_name = city.region.name, city_name = city.name)}}" method = "post" class="padding-top-10">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type ="text" class="form-control" id="name" maxlength="250" name="name" value="{{city.name}}">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" class="form-control" maxlength="250" cols="30" rows="3">{{city.description}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="current-picture">Picture:</label>
+            </div>
+            <div class="form-group">
+                <img src="{{city.picture}}" alt="{{city.picture}}" id="current-picture" class="img-thumbnail">
+            </div>
+            <div class="form-group">
+                <label for="picture">Picture URL:</label>
+                <input type ="url" class="form-control" id="picture" maxlength="250" name="picture" placeholder="{{city.picture}}" value="{{city.picture}}">
+            </div>
+            <div class="form-group">
+                <label for="picture">Region:</label>
+                <select name="region">
+                {% for region in regions %}
+                    <option value="{{region.name}}" {% if region == city.region %} selected {% endif %}>{{region.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                <a href="{{url_for('showRegion', region_name=city.region.name)}}">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

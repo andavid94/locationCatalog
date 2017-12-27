@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Catalog{% endblock title %}
+
+{% block content %}
+{% include "nav.html" %}
+
+
+<div class="flash">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li> <strong> {{ message }} </strong></li>
+            {% endfor %}    
+        </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Page Content -->
+<section id="catalog" class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+            {% include "regions.html" %}
+
+            <div class="col-md-9">
+                <h4 class="padding-bottom-19">Recently Added Cities</h4>
+                
+                {% for city in cities %}
+                    <div class="thumbnail">
+                        <div class="caption-full">
+                            <img class="img-responsive img-center" src="{{ city.picture }}" alt="{{ city.name }}">
+                        </div>
+                        <a href = "{{url_for('showCity', region_name = city.region.name, city_name = city.name)}}">
+                            <h4>{{ city.name }}</h4>
+                            <h6>({{ city.region.name }})</h6>
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.section -->
+{% endblock content%}
